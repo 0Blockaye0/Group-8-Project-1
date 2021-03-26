@@ -1,31 +1,29 @@
 
 
-var getEvents = function() {
+var getEvents = function(artist) {
 
-    var apiKey = " "
+    var apiKey = "14101bf418a50454455bae74560f1204"
     
-    var apiUrl = " " + apiKey;
+    var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${apiKey}&format=json`;
     
-
     // make a request to the url
-    fetch(apiUrl, header)
+    fetch(apiUrl)
     .then(function(response) {
       // request was successful
       if (response.ok) {
         response.json().then(function(data) {
             console.log(data);
-          displayRepos(data, zip);
+          // function(data);
         });
       } else {
         alert("Error: " + response.statusText);
       }
     })
     .catch(function(error) {
-      // Notice this `.catch()` getting chained onto the end of the `.then()` method
-      alert("Unable to connect to ticketmaster");
+      alert("Unable to connect to the API");
     });
     
 };
 
-getEvents();
+getEvents("Queen");
 
