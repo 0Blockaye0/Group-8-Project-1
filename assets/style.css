@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: ghostwhite;
+    text-align: center;
+    height: 125px;
+    width: auto;
+    
+}
+
+.main-container {
+    height: 800px;
+    width: auto;
+    background-image: url(./img/background\ PINK-SMOKE.png);
+    display: flex;
+    justify-content: center;
+}
+
+
+.search-container {
+    margin: auto;
+}
+
+footer {
+    background-color: black;
+    color: blanchedalmond;
+    height: 50px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
