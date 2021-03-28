@@ -1,5 +1,13 @@
 var userSearch = document.getElementById("search-container");
 
+
+
+ var trackArray = [];
+//  data.tracks.track.then(data.tracks.track.array.forEach(element => {
+//   trackArray.push(element);
+
+
+
 var getTracks = function (weatherSearchTerm) {
   var apiKey = "14101bf418a50454455bae74560f1204";
 
@@ -14,8 +22,12 @@ var getTracks = function (weatherSearchTerm) {
       // request was successful
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data);
-          // function(data);
+          // console.log(data.tracks.track[0]);
+          trackArray.push(data.tracks.track);
+          console.log(trackArray);
+          console.log(weatherSearchTerm);
+          // getSimilarTags(weatherSearchTerm);
+        
         });
       } else {
         alert("Error: " + response.statusText);
@@ -61,6 +73,7 @@ var getWeather = function(cityName, stateCode) {
           console.log(weatherSearchTerm);
 
           getTracks(weatherSearchTerm);
+          return weatherSearchTerm;
       });
     } else {
       alert("Error: " + response.statusText);
