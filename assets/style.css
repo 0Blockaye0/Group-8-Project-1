@@ -33,7 +33,7 @@
     height: 350px;
     opacity: 90%;
     flex-direction: column;
-
+    border-radius: 5px;
 }
 
 .search-container .btn-holder {
@@ -62,6 +62,7 @@
     background-color: black;
     opacity: 90%;
     text-align: left;
+    border-radius: 5px;
 }
 .weather-info {
     text-align: left;
