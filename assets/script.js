@@ -2,24 +2,32 @@ var userSearch = document.getElementById("search-container");
 
 var trackArray = [];
 
-likeCloudsArr = ["chill", "lazy", "gloom", "vapour", "haze"];
-likeRainArr = ["wet", "damp", "pouring", "thunder", "storm", "peacful", "indoors", "flood"];
-likeClear = [];
-likeSunny = [];
-likeSnow = [];
+likeCloudsArr = ["chill", "lazy", "gloom", "vapour", "haze", "fog", "daze", "sad"];
+likeRainArr = ["wet", "damp", "pouring", "thunder", "storm", "peacful", "indoors", "flood", "lightning"];
+likeClearArr = ["air", "clearly", "open"];
+likeSunnyArr = ["bright", "sunshine","warm", "flowers", "blue sky", "hot", "heat", "beach", "summer"];
+likeSnowArr = ["cold", "winter", "peacfull", "ice", "blizzard", "snowy", ];
+
 
 
 
 //////////////////////////////////////
-/// currently only accepting "clouds" as a condition to get more tracks
+/// currently only accepting "Clouds" and "Clear" as a condition to get more tracks
 var getSimilarTags = function(tag) {
-  if (tag = "clouds") {
+  if (tag === "Clouds") {
       newTag = likeCloudsArr[Math.floor(Math.random() * likeCloudsArr.length)];
       console.log(newTag);
       getMoreTracks(newTag);
+  } else {
+    if (tag === "Clear") {
+      newTag = likeClearArr[Math.floor(Math.random() * likeClearArr.length)];
+      console.log(newTag);
+      getMoreTracks(newTag);
+    };
   };
 };
 //////////////////////////////////////
+
 
 
 
@@ -126,6 +134,10 @@ var getWeather = function(cityName, stateCode) {
   .catch(function(error) {
     alert("Unable to connect to the weatherAPI");
   });
+
+};
+
+var displayTracks = function (trackArray) {
 
 };
 
