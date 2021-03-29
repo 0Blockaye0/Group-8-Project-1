@@ -50,11 +50,21 @@
     color: darkgrey;
 }
 
+.search-button {
+    display: flex;
+    height: 100px;
+    width: 200px;
+}
+
 .weather-container {
     display: block;
     margin: auto;
     background-color: black;
     opacity: 90%;
+    text-align: left;
+}
+.weather-info {
+    text-align: left;
 }
 
 footer {
