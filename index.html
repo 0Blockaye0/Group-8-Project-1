@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherGroupie</title>
     <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
 </head>
+
 <body>
+    <!--Header-->
     <header class="header">
         <h1>WeatherGroupie</h1>
     </header>
-
+    <!-- Main -->
     <div class="main-container">
-        
-        <div class="search-container">
-            <button id="search-button">Search</button>
-            <input id="search-input">
+
+        <div class="uk-card uk-card-body uk-card-large search-container">
+            <h3 class="uk-card-title card-title">Title</h3>
+            <div class="btn-holder">
+                <input id="search-input">
+                <button id="search-button" class="uk-button">Search</button>
+            </div>
+        </div>
+
+        <!-- weather container -->
+        <div class="weather-container">
+            <div class="uk-card uk-card-body uk-card-large">
+                <p>conditions;</p>
+                <p>conditions;</p>
+                <p>conditions;</p>
+                <p>conditions;</p>
+                
+                
+            </div>
         </div>
     </div>
+
 
     <footer>
         <div>
@@ -32,4 +52,5 @@
 
     <script src="./assets/script.js"></script>
 </body>
+
 </html>

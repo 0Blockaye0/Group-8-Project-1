@@ -26,7 +26,35 @@
 
 
 .search-container {
+    display: flex;
     margin: auto;
+    background-color: black;
+    width: 700px;
+    height: 350px;
+    opacity: 90%;
+    flex-direction: column;
+
+}
+
+.search-container .btn-holder {
+    flex-direction: row;
+    justify-content: flex-end;
+    display: flex;
+}
+
+.search-container .btn-holder button {
+    padding: 7px 15px;
+    background-color: blueviolet;
+    opacity: 75%;
+    font-size: medium;
+    color: darkgrey;
+}
+
+.weather-container {
+    display: block;
+    margin: auto;
+    background-color: black;
+    opacity: 90%;
 }
 
 footer {
