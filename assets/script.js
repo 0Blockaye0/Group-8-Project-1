@@ -2,6 +2,10 @@ var userSearch = document.getElementById("search-container");
 
 var trackArray = [];
 
+likeHazeArr = ["hazey", "stoned", "dreamy", "space", "stellar"];
+
+likeMistArr = ["reverb", "damp", "relaxing", "smooth"];
+
 likeCloudsArr = [
   "chill",
   "lazy",
@@ -64,7 +68,15 @@ var getSimilarTags = function (tag) {
     newTag = likeSnowArr[Math.floor(Math.random() * likeSnowArr.length)];
     console.log(newTag);
     getMoreTracks(newTag);
-  }
+  } else if (tag === "Mist") {
+    newTag = likeMistArr[Math.floor(Math.random() * likeMistArr.length)];
+    console.log(newTag);
+    getMoreTracks(newTag);
+  } else if (tag === "Haze"){
+    newTag = likeHazeArr[Math.floor(Math.random() * likeHazeArr.length)];
+    console.log(newTag);
+    getMoreTracks(newTag);
+  };
 };
 
 var getMoreTracks = function (newTag) {
@@ -170,6 +182,49 @@ var getWeather = function (cityName, stateCode) {
     });
 };
 
+var getAlbum = function (currentMusic) {
+  // console.log(currenMusic);
+  var apiKey = "14101bf418a50454455bae74560f1204";
+
+  // console.log(`${currentMusic.artist}`);
+
+  var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${apiKey}&artist=${currentMusic.artist}&track=${currentMusic.track}&format=json`
+  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.getSimilar&tag=${artist}&api_key=${apiKey}&format=json`
+  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${newTag}&api_key=${apiKey}&format=json`;
+  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=${artist}&api_key=${apiKey}&format=json`
+  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${apiKey}&format=json`;
+
+  // make a request to the url
+  fetch(apiUrl)
+    .then(function (response) {
+      // request was successful
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          //console.log(data.track.album.title);
+          var albumTitle = data.track.album.title;
+          if (!albumTitle) {
+            console.log("NO ALBUM DATA AVAILABLE ON THIS TRACK.");
+          } else {
+            console.log("THE ALBUM IS: ", albumTitle)
+            currentMusic.album = albumTitle;
+            console.log(currentMusic);
+
+            napsterSearch(currentMusic);
+          };
+        });
+      } else {
+        alert("Error: " + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to the lastfm API for album");
+    });
+}
+
+
+// d5cc67b8-1cc4-453b-96e8-44487acdebea
+
 var pickTrack = function () {
   var trackList = trackArray[Math.floor(Math.random() * trackArray.length)];
   console.log(trackList);
@@ -177,6 +232,7 @@ var pickTrack = function () {
   var currentMusic = {
     track: "",
     artist: "",
+    album: ""
   };
 
   var random = Math.floor(Math.random() * trackList.length);
@@ -184,18 +240,33 @@ var pickTrack = function () {
 
   var track = trackList[random].name;
   console.log(track);
+
   var artist = trackList[random].artist.name;
   console.log(artist);
+
   currentMusic.track = track;
   currentMusic.artist = artist;
   console.log(currentMusic);
 
-  napsterSearch(artist, track);
+  getAlbum(currentMusic);
+
+  
+
+  // napsterSearch(artist, track);
 };
 
-var napsterSearch = function (/*artist, album, track*/) {
+var napsterSearch = function (currentMusic) {
+console.log(currentMusic);
+  
   var apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
-  var apiUrl = `http://api.napster.com/v2.2/tracks/weezer/weezer-blue-album-deluxe-edition/say-it-aint-so?apikey=${apiKey}`;
+
+
+  ///////////////////////
+  // replace space with dash '-'
+  ///////////////////////
+
+  
+  var apiUrl = `http://api.napster.com/v2.2/tracks/${currentMusic.artist}/${currentMusic.album}/${currentMusic.track}?apikey=${apiKey}`;
 
   fetch(apiUrl)
   .then(function (response) {
