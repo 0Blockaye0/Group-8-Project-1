@@ -69,11 +69,10 @@
     margin: auto;
     background-color: black;
     opacity: 90%;
-    text-align: left;
     border-radius: 5px;
 }
 .weather-info {
-    text-align: left;
+    text-align: center;
 }
 
 footer {
