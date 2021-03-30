@@ -25,11 +25,7 @@ likeRainArr = [
   "lightning",
 ];
 
-likeClearArr = [
-"air", 
-"fresh", 
-"open"
-];
+likeClearArr = ["air", "fresh", "open"];
 
 likeSunnyArr = [
   "bright",
@@ -43,21 +39,9 @@ likeSunnyArr = [
   "summer",
 ];
 
-likeSnowArr = [
-  "cold", 
-  "winter", 
-  "peacfull", 
-  "ice", 
-  "blizzard", 
-  "snowy"
-];
+likeSnowArr = ["cold", "winter", "peacfull", "ice", "blizzard", "snowy"];
 
-likeDrizzleArr = [
-  "beats", 
-  "chill", 
-  "cool", 
-  "vibe"
-];
+likeDrizzleArr = ["beats", "chill", "cool", "vibe"];
 
 var getSimilarTags = function (tag) {
   if (tag === "Clouds") {
@@ -101,6 +85,7 @@ var getMoreTracks = function (newTag) {
           // console.log(data);
           trackArray.push(data.tracks.track);
           console.log(trackArray);
+          pickTrack();
         });
       } else {
         alert("Error: " + response.statusText);
@@ -185,7 +170,129 @@ var getWeather = function (cityName, stateCode) {
     });
 };
 
-var displayTracks = function (trackArray) {};
+var pickTrack = function () {
+  var trackList = trackArray[Math.floor(Math.random() * trackArray.length)];
+  console.log(trackList);
+
+  var currentMusic = {
+    track: "",
+    artist: "",
+  };
+
+  var random = Math.floor(Math.random() * trackList.length);
+  console.log(random);
+
+  var track = trackList[random].name;
+  console.log(track);
+  var artist = trackList[random].artist.name;
+  console.log(artist);
+  currentMusic.track = track;
+  currentMusic.artist = artist;
+  console.log(currentMusic);
+
+  napsterSearch(artist, track);
+};
+
+var napsterSearch = function (/*artist, album, track*/) {
+  var apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
+  var apiUrl = `http://api.napster.com/v2.2/tracks/weezer/weezer-blue-album-deluxe-edition/say-it-aint-so?apikey=${apiKey}`;
+
+  fetch(apiUrl)
+  .then(function (response) {
+    // request was successful
+    if (response.ok) {
+      response.json().then(function (data) {
+        console.log(data);
+
+        var preview = data.tracks[0].previewURL;
+        console.log(preview);
+
+        var audioEl = document.createElement("audio");
+        console.log(audioEl);
+
+        audioEl.setAttribute("src", preview);
+        audioEl.setAttribute("controls", "contols");
+        console.log(audioEl);
+
+        var trackContainer = document.getElementById("track-container");
+        console.log(trackContainer);
+
+        trackContainer.appendChild(audioEl);
+
+    
+      });
+    };  
+  });
+};
+
+
+////////////////////////////////////////
+// var getAudioSample = function (artist, track) {
+//   var apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
+//   // var apiUrl =
+
+//   Napster.init({
+//     consumerKey: `${apiKey}`, // application key of your application
+//     isHTML5Compatible: true, // (boolean) true if browser supports HTML5 player
+//     player: "track-container", // false, flash player will be used instead)
+//   });
+
+//   const width = 700;
+//   const height = 400;
+//   const left = screen.width / 2 - width / 2;
+//   const top = screen.height / 2 - height / 2;
+//   const $loginButton = $("#btn-login");
+//   const $loginSection = $("#login-section");
+//   const $result = $("#result");
+//   const templateSource = document.getElementById("result-template").innerHTML;
+//   const resultsTemplate = Handlebars.compile(templateSource);
+
+//   const napsterAPI = "https://api.napster.com";
+//   const APIKEY = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
+//   const oauthURL = `${napsterAPI}/oauth/authorize?client_id=${APIKEY}&response_type=code`;
+
+//   const REDIRECT_URI = "https://0blockaye0.github.io/Group-8-Project-1/";
+
+//   function fetchUserData(accessToken) {
+//     return $.ajax({
+//       url: `${napsterAPI}/v2.1/me`,
+//       headers: {
+//         Authorization: "Bearer " + accessToken,
+//       },
+//     });
+//   }
+
+//   function login() {
+//     window.addEventListener(
+//       "message",
+//       (event) => {
+//         var hash = JSON.parse(event.data);
+//         if (hash.type === "access_token") {
+//           fetchUserData(hash.access_token).then((data) => {
+//             $loginSection.hide();
+//             $result.html(resultsTemplate(data.me));
+//             $result.show();
+//           });
+//         }
+//       },
+//       false
+//     );
+
+//     window.open(
+//       `${oauthURL}&redirect_uri=${REDIRECT_URI}`,
+//       "Napster",
+//       `menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=${width},height=${height},top=${top}, left=${left}`
+//     );
+//   }
+
+//   $loginButton.click(() => {
+//     login();
+//   });
+// };
+
+////////////////////////////////////////
+
+//var displayTracks = function (trackArray) {};
 
 userSearch.addEventListener("submit", searchHandler);
 
