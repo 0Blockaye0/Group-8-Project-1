@@ -200,12 +200,13 @@ var getAlbum = function (currentMusic) {
       // request was successful
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data);
+          console.log("this is getAlbum data:", data);
           //console.log(data.track.album.title);
-          var albumTitle = data.track.album.title;
-          if (!albumTitle) {
+          if (!data || !data.track.album || !data.track.album.title) {
             console.log("NO ALBUM DATA AVAILABLE ON THIS TRACK.");
+            pickTrack();
           } else {
+            var albumTitle = data.track.album.title;
             console.log("THE ALBUM IS: ", albumTitle)
             currentMusic.album = albumTitle;
             console.log(currentMusic);
@@ -238,13 +239,15 @@ var pickTrack = function () {
   var random = Math.floor(Math.random() * trackList.length);
   console.log(random);
 
-  var track = trackList[random].name;
-  console.log(track);
+  // if (trackList[random].)
+  
+  var trackName = trackList[random].name;
+  console.log(trackName);
 
   var artist = trackList[random].artist.name;
   console.log(artist);
 
-  currentMusic.track = track;
+  currentMusic.track = trackName;
   currentMusic.artist = artist;
   console.log(currentMusic);
 
@@ -257,15 +260,22 @@ var pickTrack = function () {
 
 var napsterSearch = function (currentMusic) {
 console.log(currentMusic);
-  
+
   var apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
 
+  currentMusic.album = currentMusic.album.replace(/\s+/g, '-').toLowerCase();
 
+  currentMusic.track = currentMusic.track.replace(/\s+/g, '-').toLowerCase();
+
+  currentMusic.artist = currentMusic.artist.replace(/\s+/g, '-').toLowerCase();
+  //artistNoSpaces.toLowerCase();
+  console.log(currentMusic);
+  
   ///////////////////////
   // replace space with dash '-'
   ///////////////////////
 
-  
+  //////////////http://api.napster.com/v2.2/tracks/weezer/weezer-blue-album-deluxe-edition/say-it-aint-so?apikey=
   var apiUrl = `http://api.napster.com/v2.2/tracks/${currentMusic.artist}/${currentMusic.album}/${currentMusic.track}?apikey=${apiKey}`;
 
   fetch(apiUrl)
@@ -275,8 +285,15 @@ console.log(currentMusic);
       response.json().then(function (data) {
         console.log(data);
 
+        if (data.tracks.length === 0) {
+          console.log("NO TRACKS SHOWED UP IN THE SEARCH");
+          pickTrack();
+        };
         var preview = data.tracks[0].previewURL;
         console.log(preview);
+        if (!preview){
+          console.log("THERE IS NO MP3 FOR THIS TRACK")
+        };
 
         var audioEl = document.createElement("audio");
         console.log(audioEl);
