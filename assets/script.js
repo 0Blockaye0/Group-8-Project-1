@@ -202,7 +202,7 @@ var getAlbum = function (currentMusic) {
         response.json().then(function (data) {
           console.log("this is getAlbum data:", data);
           //console.log(data.track.album.title);
-          if (!data || !data.track.album || !data.track.album.title) {
+          if (!data || !data.track || !data.track.album || !data.track.album.title) {
             console.log("NO ALBUM DATA AVAILABLE ON THIS TRACK.");
             pickTrack();
           } else {
@@ -289,7 +289,8 @@ console.log(currentMusic);
         var preview = data.tracks[0].previewURL;
         console.log(preview);
         if (!preview){
-          console.log("THERE IS NO MP3 FOR THIS TRACK")
+          console.log("THERE IS NO MP3 FOR THIS TRACK");
+          pickTrack();
         };
 
         var audioEl = document.createElement("audio");
@@ -299,11 +300,15 @@ console.log(currentMusic);
         audioEl.setAttribute("controls", "contols");
         console.log(audioEl);
 
-        var trackContainer = document.getElementById("track-container");
+        var trackContainer = document.getElementById("artist-name-container");
         console.log(trackContainer);
-
+        trackContainer.innerHTML = "Artist: " + currentMusic.artist +  "<br/> Album :" + currentMusic.album;
         trackContainer.appendChild(audioEl);
 
+        var trackNameEl = document.getElementById("track-title");
+        trackNameEl.innerHTML = currentMusic.track;
+
+        // var albumEl = document.createElement("")
     
       });
     };  
@@ -315,3 +320,4 @@ console.log(currentMusic);
 userSearch.addEventListener("submit", searchHandler);
 
 //getWeather("Austin, TX");
+
