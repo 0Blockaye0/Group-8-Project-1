@@ -50,31 +50,31 @@ likeDrizzleArr = ["beats", "chill", "cool", "vibe"];
 var getSimilarTags = function (tag) {
   if (tag === "Clouds") {
     newTag = likeCloudsArr[Math.floor(Math.random() * likeCloudsArr.length)];
-    console.log(newTag);
+    console.log("the 2nd tag is :", newTag);
     getMoreTracks(newTag);
   } else if (tag === "Clear") {
     newTag = likeClearArr[Math.floor(Math.random() * likeClearArr.length)];
-    console.log(newTag);
-    getMoreTracks(newTag);
+    console.log("the 2nd tag is :", newTag);
+    getMoreTracks(newTag); 
   } else if (tag === "Rain") {
     newTag = likeRainArr[Math.floor(Math.random() * likeRainArr.length)];
-    console.log(newTag);
+    console.log("the 2nd tag is :", newTag);
     getMoreTracks(newTag);
   } else if (tag === "Sunny") {
     newTag = likeSunnyArr[Math.floor(Math.random() * likeSunnyArr.length)];
-    console.log(newTag);
+    console.log("the 2nd tag is :", newTag);
     getMoreTracks(newTag);
   } else if (tag === "Snow") {
     newTag = likeSnowArr[Math.floor(Math.random() * likeSnowArr.length)];
-    console.log(newTag);
+    console.log("the 2nd tag is :", newTag);
     getMoreTracks(newTag);
   } else if (tag === "Mist") {
     newTag = likeMistArr[Math.floor(Math.random() * likeMistArr.length)];
-    console.log(newTag);
+    console.log("the 2nd tag is :", newTag);
     getMoreTracks(newTag);
   } else if (tag === "Haze"){
     newTag = likeHazeArr[Math.floor(Math.random() * likeHazeArr.length)];
-    console.log(newTag);
+    console.log("the 2nd tag is :", newTag);
     getMoreTracks(newTag);
   };
 };
@@ -96,7 +96,7 @@ var getMoreTracks = function (newTag) {
         response.json().then(function (data) {
           // console.log(data);
           trackArray.push(data.tracks.track);
-          console.log(trackArray);
+          console.log("the tracks that were returned from the tags searched are: ", trackArray);
           pickTrack();
         });
       } else {
@@ -146,7 +146,7 @@ var searchHandler = function (event) {
   console.log(userSearchInputEl);
 
   var userInput = userSearchInputEl.value.trim();
-  console.log(userInput);
+  console.log("this city searched :", userInput);
 
   if (userInput) {
     getWeather(userInput);
@@ -168,7 +168,7 @@ var getWeather = function (cityName, stateCode) {
         response.json().then(function (data) {
           console.log("this is the weather data: ", data);
           var weatherSearchTerm = data.weather[0].main;
-          console.log(weatherSearchTerm);
+          console.log("the current weatherSearchTerm that will be the 1st tag searched is : ", weatherSearchTerm);
 
           getTracks(weatherSearchTerm);
           return weatherSearchTerm;
@@ -222,9 +222,6 @@ var getAlbum = function (currentMusic) {
       alert("Unable to connect to the lastfm API for album");
     });
 }
-
-
-// d5cc67b8-1cc4-453b-96e8-44487acdebea
 
 var pickTrack = function () {
   var trackList = trackArray[Math.floor(Math.random() * trackArray.length)];
