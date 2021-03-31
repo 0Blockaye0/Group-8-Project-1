@@ -84,3 +84,18 @@ footer {
     justify-content: center;
     align-items: center
 }
+
+#track-container {
+    background-color: black;
+    height: 50px;
+    width: 500px;
+    border-radius: 25px;
+    color: honeydew;
+    text-align: justify;
+    font-size: xx-large;
+}
+
+#track-label {
+    margin-left: 20px;
+    margin-top: 5px;
+};
