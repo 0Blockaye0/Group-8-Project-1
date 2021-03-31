@@ -320,4 +320,3 @@ console.log(currentMusic);
 userSearch.addEventListener("submit", searchHandler);
 
 //getWeather("Austin, TX");
-
