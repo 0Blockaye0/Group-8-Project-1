@@ -41,11 +41,12 @@
 }
 
 .main-container {
-    height: auto;
+    height: 800px;
     width: auto;
     background-image: url(./img/background\ PINK-SMOKE.png);
     display: grid;
     justify-content: center;
+
 }
 
 .search-input {
@@ -64,6 +65,7 @@
     opacity: 90%;
     flex-direction: column;
     border-radius: 5px;
+    text-align: center;
 }
 
 .btn-holder {
@@ -93,9 +95,12 @@
     background-color: black;
     opacity: 90%;
     border-radius: 5px;
+    max-height: 250px;
+    text-align: -webkit-center;
 }
 .weather-info {
     text-align: center;
+    max-width: fit-content;
 }
 
 footer {
@@ -134,7 +139,9 @@ ul {
     margin-bottom: 200px;
     list-style: none;
     padding-left: 0px;
+    text-align: center;
 }
+
 
 .uk-align-right {
     margin-left: 0px;
@@ -146,4 +153,5 @@ ul {
 
 .uk-card-body {
     display: block;
+    height: fit-content;
 };

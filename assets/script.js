@@ -2,8 +2,6 @@ var userSearch = document.getElementById("search-container");
 
 var trackArray = [];
 
-var searchHistory = [];
-
 likeHazeArr = ["hazey", "stoned", "dreamy", "space", "stellar"];
 
 likeMistArr = ["reverb", "damp", "relaxing", "smooth"];
@@ -321,19 +319,21 @@ var napsterSearch = function (currentMusic) {
                         imageEl.className = "albumArt";
                         imageEl.setAttribute("src", currentMusic.image);
                         imageEl.setAttribute("alt", "no image available");
-                        // musicInfoList.appendChild(imageEl);
+                        musicInfoList.appendChild(imageEl);
                         return imageEl;
                       });
                     };
                   });
         };
+
+        
+
         var musicInfoList = document.createElement("ul");
         var displayCard = document.getElementById("search-container");
 
         getAlbumArt(albumID);
 
         displayCard.appendChild(musicInfoList);
-        musicInfoList.appendChild(imageEl);
         
         var trackNameEl = document.createElement("li");
         trackNameEl.setAttribute("class", "uk-card-title card-title");
@@ -363,15 +363,6 @@ var napsterSearch = function (currentMusic) {
     };  
   });
 };
-
-<<<<<<< HEAD
-var skipTrack = function () {
-  
-};
-
-=======
->>>>>>> 59b77c3e3fc526ffe42644fbc642520eaed00867
-//var displayTracks = function (trackArray) {};
 
 userSearch.addEventListener("submit", searchHandler);
 
