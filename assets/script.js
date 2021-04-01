@@ -186,47 +186,6 @@ var getWeather = function (cityName, stateCode) {
     });
 };
 
-var getAlbum = function (currentMusic) {
-  // console.log(currenMusic);
-  var apiKey = "14101bf418a50454455bae74560f1204";
-
-  // console.log(`${currentMusic.artist}`);
-
-  var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${apiKey}&artist=${currentMusic.artist}&track=${currentMusic.track}&format=json`
-  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.getSimilar&tag=${artist}&api_key=${apiKey}&format=json`
-  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${newTag}&api_key=${apiKey}&format=json`;
-  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=${artist}&api_key=${apiKey}&format=json`
-  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${apiKey}&format=json`;
-
-  // make a request to the url
-  fetch(apiUrl)
-    .then(function (response) {
-      // request was successful
-      if (response.ok) {
-        response.json().then(function (data) {
-          console.log("this is getAlbum data:", data);
-          //console.log(data.track.album.title);
-          if (!data || !data.track || !data.track.album || !data.track.album.title) {
-            console.log("NO ALBUM DATA AVAILABLE ON THIS TRACK.");
-            pickTrack();
-          } else {
-            var albumTitle = data.track.album.title;
-            console.log("THE ALBUM IS: ", albumTitle)
-            currentMusic.album = albumTitle;
-            console.log(currentMusic);
-
-            napsterSearch(currentMusic);
-          };
-        });
-      } else {
-        alert("Error: " + response.statusText);
-      }
-    })
-    .catch(function (error) {
-      alert("Unable to connect to the lastfm API for album");
-    });
-};
-
 var pickTrack = function () {
   var trackList = trackArray[Math.floor(Math.random() * trackArray.length)];
   console.log(trackList);
@@ -266,6 +225,47 @@ var pickTrack = function () {
   
 
   // napsterSearch(artist, track);
+};
+
+var getAlbum = function (currentMusic) {
+  // console.log(currenMusic);
+  var apiKey = "14101bf418a50454455bae74560f1204";
+
+  // console.log(`${currentMusic.artist}`);
+
+  var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${apiKey}&artist=${currentMusic.artist}&track=${currentMusic.track}&format=json`
+  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.getSimilar&tag=${artist}&api_key=${apiKey}&format=json`
+  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${newTag}&api_key=${apiKey}&format=json`;
+  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=${artist}&api_key=${apiKey}&format=json`
+  // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${apiKey}&format=json`;
+
+  // make a request to the url
+  fetch(apiUrl)
+    .then(function (response) {
+      // request was successful
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log("this is getAlbum data:", data);
+          //console.log(data.track.album.title);
+          if (!data || !data.track || !data.track.album || !data.track.album.title) {
+            console.log("NO ALBUM DATA AVAILABLE ON THIS TRACK.");
+            pickTrack();
+          } else {
+            var albumTitle = data.track.album.title;
+            console.log("THE ALBUM IS: ", albumTitle)
+            currentMusic.album = albumTitle;
+            console.log(currentMusic);
+
+            napsterSearch(currentMusic);
+          };
+        });
+      } else {
+        alert("Error: " + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to the lastfm API for album");
+    });
 };
 
 var napsterSearch = function (currentMusic) {
@@ -319,16 +319,19 @@ var napsterSearch = function (currentMusic) {
                         imageEl.className = "albumArt";
                         imageEl.setAttribute("src", currentMusic.image);
                         imageEl.setAttribute("alt", "no image available");
-                        musicInfoList.appendChild(imageEl);
+                        // musicInfoList.appendChild(imageEl);
+                        return imageEl;
                       });
                     };
                   });
         };
         var musicInfoList = document.createElement("ul");
         var displayCard = document.getElementById("search-container");
-        displayCard.appendChild(musicInfoList);
 
         getAlbumArt(albumID);
+
+        displayCard.appendChild(musicInfoList);
+        musicInfoList.appendChild(imageEl);
         
         var trackNameEl = document.createElement("li");
         trackNameEl.setAttribute("class", "uk-card-title card-title");
@@ -359,7 +362,9 @@ var napsterSearch = function (currentMusic) {
   });
 };
 
-
+var skipTrack = function () {
+  
+};
 
 //var displayTracks = function (trackArray) {};
 
