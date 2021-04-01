@@ -221,7 +221,7 @@ var getAlbum = function (currentMusic) {
     .catch(function (error) {
       alert("Unable to connect to the lastfm API for album");
     });
-}
+};
 
 var pickTrack = function () {
   var trackList = trackArray[Math.floor(Math.random() * trackArray.length)];
@@ -230,7 +230,8 @@ var pickTrack = function () {
   var currentMusic = {
     track: "",
     artist: "",
-    album: ""
+    album: "",
+    image: ""
   };
 
   var random = Math.floor(Math.random() * trackList.length);
@@ -244,8 +245,16 @@ var pickTrack = function () {
   var artist = trackList[random].artist.name;
   console.log(artist);
 
+  var imageObj = trackList[random].image[0];
+  // console.log(Obj);
+  console.log(Object.values(imageObj));
+  var imagePng = Object.values(imageObj)  
+  console.log(imagePng);
+
+
   currentMusic.track = trackName;
   currentMusic.artist = artist;
+  currentMusic.image = imagePng[0];
   console.log(currentMusic);
 
   getAlbum(currentMusic);
@@ -256,24 +265,15 @@ var pickTrack = function () {
 };
 
 var napsterSearch = function (currentMusic) {
-console.log(currentMusic);
-
-  var apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
-
+  console.log(currentMusic);
   currentMusic.album = currentMusic.album.replace(/\s+/g, '-').toLowerCase();
-
   currentMusic.track = currentMusic.track.replace(/\s+/g, '-').toLowerCase();
-
   currentMusic.artist = currentMusic.artist.replace(/\s+/g, '-').toLowerCase();
-  //artistNoSpaces.toLowerCase();
   console.log(currentMusic);
   
-  ///////////////////////
-  // replace space with dash '-'
-  ///////////////////////
-
-  //////////////http://api.napster.com/v2.2/tracks/weezer/weezer-blue-album-deluxe-edition/say-it-aint-so?apikey=
+  var apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
   var apiUrl = `http://api.napster.com/v2.2/tracks/${currentMusic.artist}/${currentMusic.album}/${currentMusic.track}?apikey=${apiKey}`;
+  // var apiUrlImage = ``
 
   fetch(apiUrl)
   .then(function (response) {
@@ -293,27 +293,77 @@ console.log(currentMusic);
           pickTrack();
         };
 
-        var audioEl = document.createElement("audio");
-        console.log(audioEl);
+        var albumID = data.tracks[0].albumId.substring(0,1).toUpperCase() + data.tracks[0].albumId.substring(1);
+        console.log(albumID);
 
+        var getAlbumArt = function(albumID) {
+
+          apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
+          apiUrl = `http://api.napster.com/v2.2/albums/${albumID}/images?apikey=${apiKey}`;
+        
+          fetch(apiUrl)
+                  .then(function (response) {
+                    if (response.ok) {
+                      response.json().then(function (data) {
+                        console.log(data);
+        
+                        currentMusic.image = data.images[0].url;
+                        console.log(currentMusic);
+
+                        var imageEl = document.createElement("img");
+                        imageEl.setAttribute("src", currentMusic.image);
+                        imageEl.setAttribute("alt", "no image available");
+                        displayCard.appendChild(imageEl);
+
+
+                        
+                      });
+                    };
+                  });
+        };
+
+        getAlbumArt(albumID);
+
+        
+
+        var musicInfoList = document.createElement("ul");
+        var displayCard = document.getElementById("search-container");
+        displayCard.appendChild(musicInfoList);
+        
+        var trackNameEl = document.createElement("li");
+        trackNameEl.setAttribute("class", "uk-card-title card-title");
+        trackNameEl.setAttribute("id", "track-title");
+        trackNameEl.innerHTML = currentMusic.track;
+        musicInfoList.appendChild(trackNameEl);
+
+        var artistNameEl = document.createElement("li");
+        //console.log(artistNameEl);
+        artistNameEl.setAttribute("id", "artist-name");
+        artistNameEl.innerHTML = "Artist: " + currentMusic.artist;
+        musicInfoList.appendChild(artistNameEl);
+
+        var albumNameContainer = document.createElement("li");
+        // console.log(albumNameContainer);
+        albumNameContainer.innerHTML = "Album: " + currentMusic.album;
+        musicInfoList.appendChild(albumNameContainer);
+
+        // var audioHolder = document.createElement("li");
+        // audioHolder.setAttribute("id", "audio-holder");
+        // musicInfoList.appendChild(audioHolder); 
+
+        var audioEl = document.createElement("audio");
+        // console.log(audioEl);
         audioEl.setAttribute("src", preview);
         audioEl.setAttribute("controls", "contols");
-        console.log(audioEl);
-
-        var trackContainer = document.getElementById("artist-name-container");
-        console.log(trackContainer);
-        trackContainer.innerHTML = "Artist: " + currentMusic.artist +  "<br/> Album :" + currentMusic.album;
-        trackContainer.appendChild(audioEl);
-
-        var trackNameEl = document.getElementById("track-title");
-        trackNameEl.innerHTML = currentMusic.track;
-
+        // console.log(audioEl);
+        displayCard.appendChild(audioEl);
         // var albumEl = document.createElement("")
-    
       });
     };  
   });
 };
+
+
 
 //var displayTracks = function (trackArray) {};
 
