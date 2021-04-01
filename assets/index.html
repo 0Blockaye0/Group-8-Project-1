@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherGroupie</title>
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
+</head>
+
+<body>
+    <!--Header-->
+    <header class="header">
+        <h1>WeatherGroupie</h1>
+    </header>
+    <!-- Main -->
+    <div class="uk-grid-column-small uk-grid-row-large main-container">
+
+
+        <div class="uk-card uk-card-body uk-card-large search-container">
+            <h3 class="uk-card-title card-title" id="track-title">Title</h3>
+            <p id="artist-name-container">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus quo harum debitis maxime mollitia rem,
+                consectetur saepe ut voluptatem hic deleniti, dolores molestias at deserunt labore et itaque. Sapiente,
+                corrupti.</p>
+            <form id="search-container">
+                <span class="btn-holder">
+                    <input id="search-input" class="uk-align-right">
+                    <button id="search-button" class="uk-button uk-align-right">Search</button>
+                </span>
+            </form>
+        </div>
+    <!-- weather container -->
+        <div class="weather-container">
+            <div class="uk-card uk-card-body uk-card-large weather-info">
+                <p id ="searched-city">conditions;</p>
+            </div>
+        </div>
+
+    </div>
+
+
+
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="./assets/script.js"></script>
+    
+</body>
+<footer>
+
+        <div>
+            <span class="app-info">
+                App Info
+            </span>
+        </div>
+    </footer>
+
+</html>
