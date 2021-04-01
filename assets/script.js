@@ -47,6 +47,26 @@ likeSnowArr = ["cold", "winter", "peacfull", "ice", "blizzard", "snowy"];
 
 likeDrizzleArr = ["beats", "chill", "cool", "vibe"];
 
+var searchHandler = function (event) {
+  event.preventDefault();
+  console.log("handler has been called");
+
+  var userSearchInputEl = document.getElementById("search-input");
+  console.log(userSearchInputEl);
+
+  var userInput = userSearchInputEl.value.trim();
+  console.log("this city searched :", userInput);
+
+  if (userInput) {
+    getWeather(userInput);
+    userSearchInputEl.value = "";
+  } else {
+    alert("please enter a city and state. Ex: 'Austin, TX'.");
+  }
+  var searchedCityEl = document.getElementById("searched-city"); 
+  searchedCityEl.innerHTML = "Location: " + userInput;
+};
+
 var getSimilarTags = function (tag) {
   if (tag === "Clouds") {
     newTag = likeCloudsArr[Math.floor(Math.random() * likeCloudsArr.length)];
@@ -136,26 +156,6 @@ var getTracks = function (weatherSearchTerm) {
     .catch(function (error) {
       alert("Unable to connect to the lastfm API");
     });
-};
-
-var searchHandler = function (event) {
-  event.preventDefault();
-  console.log("handler has been called");
-
-  var userSearchInputEl = document.getElementById("search-input");
-  console.log(userSearchInputEl);
-
-  var userInput = userSearchInputEl.value.trim();
-  console.log("this city searched :", userInput);
-
-  if (userInput) {
-    getWeather(userInput);
-    userSearchInputEl.value = "";
-  } else {
-    alert("please enter a city and state. Ex: 'Austin, TX'.");
-  }
-  var searchedCityEl = document.getElementById("searched-city"); 
-  searchedCityEl.innerHTML = "Location: " + userInput;
 };
 
 var getWeather = function (cityName, stateCode) {
@@ -320,13 +320,20 @@ var napsterSearch = function (currentMusic) {
                         imageEl.setAttribute("src", currentMusic.image);
                         imageEl.setAttribute("alt", "no image available");
                         musicInfoList.appendChild(imageEl);
-                        return imageEl;
                       });
                     };
                   });
         };
 
-        
+        // var btnHolder = document.getElementsByClassName("btn-holder");
+        // console.log(bt)
+
+        // clearElements(btnHolder);
+
+        // var skipBtn = document.createElement("button");
+        // skipBtn.setAttribute("class", "uk-icon");
+        // skipBtn.setAttribute("uk-icon","chevron-double-right");
+        // btnHolder.appendChild(skipBtn);
 
         var musicInfoList = document.createElement("ul");
         var displayCard = document.getElementById("search-container");
@@ -362,6 +369,12 @@ var napsterSearch = function (currentMusic) {
       });
     };  
   });
+};
+
+
+
+var clearElements = function (element) {
+  element.innerHTML = "";
 };
 
 userSearch.addEventListener("submit", searchHandler);
