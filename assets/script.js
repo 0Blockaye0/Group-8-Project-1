@@ -2,6 +2,8 @@ var userSearch = document.getElementById("search-container");
 
 var trackArray = [];
 
+var searchHistory = [];
+
 likeHazeArr = ["hazey", "stoned", "dreamy", "space", "stellar"];
 
 likeMistArr = ["reverb", "damp", "relaxing", "smooth"];
@@ -154,6 +156,10 @@ var searchHandler = function (event) {
   } else {
     alert("please enter a city and state. Ex: 'Austin, TX'.");
   }
+
+  var userInput = searchHistory.find( city => city.name === citySearch);
+  console.log(userInput);
+  
 };
 
 var getWeather = function (cityName, stateCode) {
@@ -314,6 +320,10 @@ console.log(currentMusic);
     };  
   });
 };
+
+
+
+
 
 //var displayTracks = function (trackArray) {};
 
