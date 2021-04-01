@@ -175,6 +175,13 @@ var getWeather = function (cityName, stateCode) {
           console.log("the current weatherSearchTerm that will be the 1st tag searched is : ", weatherSearchTerm);
           var searchedCityEl = document.getElementById("searched-city"); 
           searchedCityEl.innerHTML = searchedCityEl.innerHTML +  "<br/> Weather: " + weatherSearchTerm +  "<br/> Temperature: " + Math.round(weatherTemp) + " Fahrenheit";
+          console.log(data.weather[0].icon);
+
+          var iconCode = data.weather[0].icon;
+          var iconEl = document.createElement("img");
+          iconEl.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
+
+          searchedCityEl.appendChild(iconEl);
 
           getTracks(weatherSearchTerm);
           return weatherSearchTerm;
