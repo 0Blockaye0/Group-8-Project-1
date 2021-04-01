@@ -101,7 +101,11 @@ footer {
 }
 
 audio {
-    float: left;
-    margin-top: 45px;
     padding: 10px;
+}
+
+ul {
+    display: inline-block;
+    max-width: 275px;
+    margin-bottom: 200px;
 };
