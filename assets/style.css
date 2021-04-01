@@ -13,15 +13,39 @@
     text-align: center;
     height: 125px;
     width: auto;
-    
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+
+.blinker {
+    animation: blinker;
+    animation-duration: 0.1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+
+#appNameCustom {
+    font-family: 'BPneon', sans-serif;
+    font-size: 100px;
+    color: aqua;
+    padding-top: 25px;
+    padding-bottom: 10px;
+    font-variant: discretionary-ligatures;
+    text-shadow: 5px 8px 5px slateblue;
 }
 
 .main-container {
-    height: 800px;
+    height: auto;
     width: auto;
     background-image: url(./img/background\ PINK-SMOKE.png);
-    display: flex;
-    justify-content:space-between;
+    display: grid;
+    justify-content: center;
 }
 
 .search-input {
@@ -34,10 +58,9 @@
 
 .search-container {
     display: flex;
-    margin: auto;
+    margin: 40px;
     background-color: black;
-    width: 700px;
-    height: 350px;
+    width: max-content;
     opacity: 90%;
     flex-direction: column;
     border-radius: 5px;
@@ -66,7 +89,7 @@
 
 .weather-container {
     display: block;
-    margin: auto;
+    margin: 30px;
     background-color: black;
     opacity: 90%;
     border-radius: 5px;
@@ -102,10 +125,25 @@ footer {
 
 audio {
     padding: 10px;
+    width:-webkit-fill-available;
 }
 
 ul {
     display: inline-block;
     max-width: 275px;
     margin-bottom: 200px;
+    list-style: none;
+    padding-left: 0px;
+}
+
+.uk-align-right {
+    margin-left: 0px;
+}
+
+.albumArt {
+ margin: inherit
+}
+
+.uk-card-body {
+    display: block;
 };

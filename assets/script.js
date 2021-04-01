@@ -116,7 +116,6 @@ var getTracks = function (weatherSearchTerm) {
   // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=${artist}&api_key=${apiKey}&format=json`
   // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${apiKey}&format=json`;
 
-
   // make a request to the url
   fetch(apiUrl)
     .then(function (response) {
@@ -175,14 +174,6 @@ var getWeather = function (cityName, stateCode) {
           console.log("the current weatherSearchTerm that will be the 1st tag searched is : ", weatherSearchTerm);
           var searchedCityEl = document.getElementById("searched-city"); 
           searchedCityEl.innerHTML = searchedCityEl.innerHTML +  "<br/> Weather: " + weatherSearchTerm +  "<br/> Temperature: " + Math.round(weatherTemp) + " Fahrenheit";
-          console.log(data.weather[0].icon);
-
-          var iconCode = data.weather[0].icon;
-          var iconEl = document.createElement("img");
-          iconEl.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
-
-          searchedCityEl.appendChild(iconEl);
-
           getTracks(weatherSearchTerm);
           return weatherSearchTerm;
         });
@@ -306,6 +297,7 @@ var napsterSearch = function (currentMusic) {
           pickTrack();
         };
 
+        // GETS ALBULM ID FOR ALBUM ARTWORK SEARCH 
         var albumID = data.tracks[0].albumId.substring(0,1).toUpperCase() + data.tracks[0].albumId.substring(1);
         console.log(albumID);
 
@@ -324,21 +316,19 @@ var napsterSearch = function (currentMusic) {
                         console.log(currentMusic);
 
                         var imageEl = document.createElement("img");
+                        imageEl.className = "albumArt";
                         imageEl.setAttribute("src", currentMusic.image);
                         imageEl.setAttribute("alt", "no image available");
-                        displayCard.appendChild(imageEl); 
+                        musicInfoList.appendChild(imageEl);
                       });
                     };
                   });
         };
-
-        getAlbumArt(albumID);
-
-        
-
         var musicInfoList = document.createElement("ul");
         var displayCard = document.getElementById("search-container");
         displayCard.appendChild(musicInfoList);
+
+        getAlbumArt(albumID);
         
         var trackNameEl = document.createElement("li");
         trackNameEl.setAttribute("class", "uk-card-title card-title");
@@ -357,10 +347,6 @@ var napsterSearch = function (currentMusic) {
         albumNameContainer.innerHTML = "Album: " + currentMusic.album;
         musicInfoList.appendChild(albumNameContainer);
 
-        // var audioHolder = document.createElement("li");
-        // audioHolder.setAttribute("id", "audio-holder");
-        // musicInfoList.appendChild(audioHolder); 
-
         var audioEl = document.createElement("audio");
         // console.log(audioEl);
         audioEl.setAttribute("src", preview);
@@ -372,6 +358,8 @@ var napsterSearch = function (currentMusic) {
     };  
   });
 };
+
+
 
 //var displayTracks = function (trackArray) {};
 
