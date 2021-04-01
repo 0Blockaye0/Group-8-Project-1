@@ -2,6 +2,8 @@ var userSearch = document.getElementById("search-container");
 
 var trackArray = [];
 
+var searchHistory = [];
+
 likeHazeArr = ["hazey", "stoned", "dreamy", "space", "stellar"];
 
 likeMistArr = ["reverb", "damp", "relaxing", "smooth"];
@@ -358,8 +360,6 @@ var napsterSearch = function (currentMusic) {
     };  
   });
 };
-
-
 
 //var displayTracks = function (trackArray) {};
 
