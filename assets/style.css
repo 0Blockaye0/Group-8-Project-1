@@ -41,7 +41,7 @@
 }
 
 .main-container {
-    height: 800px;
+    height: auto;
     width: auto;
     background-image: url(./img/background\ PINK-SMOKE.png);
     display: grid;
