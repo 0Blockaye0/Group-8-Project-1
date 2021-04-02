@@ -304,7 +304,7 @@ var napsterSearch = function (currentMusic) {
         var getAlbumArt = function(albumID) {
 
           apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
-          apiUrl = `http://api.napster.com/v2.2/albums/${albumID}/images?apikey=${apiKey}`;
+          apiUrl = `https://api.napster.com/v2.2/albums/${albumID}/images?apikey=${apiKey}`;
         
           fetch(apiUrl)
                   .then(function (response) {
