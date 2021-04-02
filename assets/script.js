@@ -276,7 +276,7 @@ var napsterSearch = function (currentMusic) {
   console.log(currentMusic);
   
   var apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
-  var apiUrl = `http://api.napster.com/v2.2/tracks/${currentMusic.artist}/${currentMusic.album}/${currentMusic.track}?apikey=${apiKey}`;
+  var apiUrl = `https://api.napster.com/v2.2/tracks/${currentMusic.artist}/${currentMusic.album}/${currentMusic.track}?apikey=${apiKey}`;
   // var apiUrlImage = ``
 
   fetch(apiUrl)
@@ -304,7 +304,7 @@ var napsterSearch = function (currentMusic) {
         var getAlbumArt = function(albumID) {
 
           apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
-          apiUrl = `http://api.napster.com/v2.2/albums/${albumID}/images?apikey=${apiKey}`;
+          apiUrl = `https://api.napster.com/v2.2/albums/${albumID}/images?apikey=${apiKey}`;
         
           fetch(apiUrl)
                   .then(function (response) {
