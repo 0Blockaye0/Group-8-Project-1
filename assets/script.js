@@ -249,7 +249,17 @@ var getWeather = function (cityName, stateCode) {
 };
 
 var pickTrack = function () {
-  var trackList = trackArray[Math.floor(Math.random() * trackArray.length)];
+
+  var trackList = [];
+
+  for (i = 0; i < trackArray.length; i++) {
+    trackArray[i].forEach(element => {
+      trackList.push(element);
+      // console.log(trackList);
+    });
+  };
+  
+  // var trackList = trackArray[Math.floor(Math.random() * trackArray.length)];
   console.log(trackList);
 
   var currentMusic = {
