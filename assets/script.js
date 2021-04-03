@@ -1,5 +1,40 @@
 
-var userSearch = document.getElementById("search-container");
+var userSearchContainer = document.getElementById("search-container");
+var searchBtn = document.getElementById("search-button")
+
+var recentLocationFormEl = document.createElement("form");
+userSearchContainer.appendChild(recentLocationFormEl);
+
+var recentLocationBtn = document.createElement("button");
+recentLocationBtn.className = "uk-button uk-button-default";
+recentLocationBtn.setAttribute("id", "recent-location");
+// console.log(recentLocationBtn);
+
+function checkRecentLocation() {
+  var recentLocation = localStorage.getItem("recentLocation");
+  // console.log(recentLocation);
+  if (recentLocation) {
+    recentLocationBtn.innerHTML = recentLocation;
+    recentLocationFormEl.appendChild(recentLocationBtn);
+  };
+};
+
+checkRecentLocation();
+
+var autoFillSearch = function (event) {
+  event.preventDefault();
+  console.log("autoFillSearch has been called");
+  var userSearchInputEl = document.getElementById("search-input");
+  // // console.log(userSearchInputEl);
+
+  // var userInput = userSearchInputEl.value.trim();
+  // console.log("this city searched :", userInput);
+
+  var recentLocation = localStorage.getItem("recentLocation");
+  console.log(recentLocation);
+  userSearchInputEl.value = recentLocation;
+};
+
 
 var modalPrompt = function (dialog, title) {
   var modalEl = document.createElement("div");
@@ -71,9 +106,10 @@ likeSnowArr = ["cold", "winter", "peacfull", "ice", "blizzard", "snowy"];
 
 likeDrizzleArr = ["beats", "chill", "cool", "vibe"];
 
-var searchHandler = function (event) {
+
+var searchHandler = function (event, ) {
   event.preventDefault();
-  // console.log("handler has been called");
+  console.log("handler has been called");
 
   var userSearchInputEl = document.getElementById("search-input");
   // console.log(userSearchInputEl);
@@ -83,6 +119,7 @@ var searchHandler = function (event) {
 
   if (userInput) {
     getWeather(userInput);
+    localStorage.setItem("recentLocation", userInput);
     userSearchInputEl.value = "";
   } else {
     // modalPrompt("please enter a city and state. Ex: 'Austin, TX'.", "invalid Format!");
@@ -400,6 +437,8 @@ var clearElements = function (element) {
   element.innerHTML = "";
 };
 
-userSearch.addEventListener("submit", searchHandler);
+userSearchContainer.addEventListener("submit", searchHandler);
+
+recentLocationFormEl.addEventListener("submit", autoFillSearch);
 
 //getWeather("Austin, TX");
