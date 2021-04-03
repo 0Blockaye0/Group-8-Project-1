@@ -1,4 +1,28 @@
+
 var userSearch = document.getElementById("search-container");
+
+var modalPrompt = function (dialog, title) {
+  var modalEl = document.createElement("div");
+  modalEl.setAttribute("class", "uk-modal uk-alert uk-alert-warning");
+  
+  var modalDialogEl = document.createElement("div");
+  modalDialogEl.setAttribute("class", "uk-modal-dialog uk-modal-body");
+  
+  var modalTitle = document.createElement("h2");
+  modalTitle.setAttribute("class", "uk-modal-title");
+  modalTitle.textContent = title;
+  modalDialogEl.appendChild(modalTitle);
+
+  var modalDialog = document.createElement("p");
+  modalDialog.textContent = dialog;
+
+  var closeBtn = document.createElement("button");
+  closeBtn.setAttribute("class", "uk-modal-close");
+  closeBtn.setAttribute("type", "button");
+  modalDialog.appendChild(closeBtn);
+
+  modalEl.toggleAttribute()
+};
 
 var trackArray = [];
 
@@ -49,10 +73,10 @@ likeDrizzleArr = ["beats", "chill", "cool", "vibe"];
 
 var searchHandler = function (event) {
   event.preventDefault();
-  console.log("handler has been called");
+  // console.log("handler has been called");
 
   var userSearchInputEl = document.getElementById("search-input");
-  console.log(userSearchInputEl);
+  // console.log(userSearchInputEl);
 
   var userInput = userSearchInputEl.value.trim();
   console.log("this city searched :", userInput);
@@ -61,6 +85,7 @@ var searchHandler = function (event) {
     getWeather(userInput);
     userSearchInputEl.value = "";
   } else {
+    // modalPrompt("please enter a city and state. Ex: 'Austin, TX'.", "invalid Format!");
     alert("please enter a city and state. Ex: 'Austin, TX'.");
   }
   var searchedCityEl = document.getElementById("searched-city"); 
@@ -370,8 +395,6 @@ var napsterSearch = function (currentMusic) {
     };  
   });
 };
-
-
 
 var clearElements = function (element) {
   element.innerHTML = "";
