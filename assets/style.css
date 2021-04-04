@@ -162,13 +162,4 @@ ul {
     height: fit-content;
 };
 
-/* Media query for mobile phones */
-@media screen and (max-width: 375px) {
-    .main-container {
-        flex: 100%;
-       
-        
-    }
 
-
-}
