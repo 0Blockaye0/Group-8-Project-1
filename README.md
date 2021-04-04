@@ -1,3 +1,4 @@
+![Screen Shot 2021-04-01 at 1 45 41 PM](https://user-images.githubusercontent.com/77707292/113517757-9b8f2b80-9547-11eb-9966-2ee748f6b766.png)
 Welcome to WeatherGroupie!
 
 This app is designed to recommend music to users by finding songs that are tagged by a range of weather descriptors. 
