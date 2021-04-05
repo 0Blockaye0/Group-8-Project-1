@@ -155,6 +155,7 @@ ul {
 .uk-card-body {
     display: block;
     height: fit-content;
+    width: auto;
 }
 
 #search-input {
@@ -202,6 +203,10 @@ ul {
 
     .uk-align-right {
         margin-left: 0px;
+    }
+
+    .weather-info {
+        font-size: small;
     }
 }
 

@@ -35,29 +35,28 @@ var autoFillSearch = function (event) {
   userSearchInputEl.value = recentLocation;
 };
 
-
-var modalPrompt = function (dialog, title) {
-  var modalEl = document.createElement("div");
-  modalEl.setAttribute("class", "uk-modal uk-alert uk-alert-warning");
+// var modalPrompt = function (dialog, title) {
+//   var modalEl = document.createElement("div");
+//   modalEl.setAttribute("class", "uk-modal uk-alert uk-alert-warning");
   
-  var modalDialogEl = document.createElement("div");
-  modalDialogEl.setAttribute("class", "uk-modal-dialog uk-modal-body");
+//   var modalDialogEl = document.createElement("div");
+//   modalDialogEl.setAttribute("class", "uk-modal-dialog uk-modal-body");
   
-  var modalTitle = document.createElement("h2");
-  modalTitle.setAttribute("class", "uk-modal-title");
-  modalTitle.textContent = title;
-  modalDialogEl.appendChild(modalTitle);
+//   var modalTitle = document.createElement("h2");
+//   modalTitle.setAttribute("class", "uk-modal-title");
+//   modalTitle.textContent = title;
+//   modalDialogEl.appendChild(modalTitle);
 
-  var modalDialog = document.createElement("p");
-  modalDialog.textContent = dialog;
+//   var modalDialog = document.createElement("p");
+//   modalDialog.textContent = dialog;
 
-  var closeBtn = document.createElement("button");
-  closeBtn.setAttribute("class", "uk-modal-close");
-  closeBtn.setAttribute("type", "button");
-  modalDialog.appendChild(closeBtn);
+//   var closeBtn = document.createElement("button");
+//   closeBtn.setAttribute("class", "uk-modal-close");
+//   closeBtn.setAttribute("type", "button");
+//   modalDialog.appendChild(closeBtn);
 
-  modalEl.toggleAttribute()
-};
+//   modalEl.toggleAttribute()
+// };
 
 var trackArray = [];
 
@@ -235,7 +234,14 @@ var getWeather = function (cityName, stateCode) {
           weatherTemp = (((data.main.temp-273.15)*9)/5)+32;
           console.log("the current weatherSearchTerm that will be the 1st tag searched is : ", weatherSearchTerm);
           var searchedCityEl = document.getElementById("searched-city"); 
-          searchedCityEl.innerHTML = searchedCityEl.innerHTML +  "<br/> Weather: " + weatherSearchTerm +  "<br/> Temperature: " + Math.round(weatherTemp) + " Fahrenheit";
+          searchedCityEl.innerHTML = searchedCityEl.innerHTML +  "<br/> Weather: " + weatherSearchTerm +  "<br/> Temperature: " + Math.round(weatherTemp);
+          console.log(data.weather[0].icon);
+
+          var iconCode = data.weather[0].icon;
+          var iconEl = document.createElement("img");
+          iconEl.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
+          searchedCityEl.appendChild(iconEl);
+
           getTracks(weatherSearchTerm);
           return weatherSearchTerm;
         });
@@ -413,6 +419,11 @@ var napsterSearch = function (currentMusic) {
         getAlbumArt(albumID);
 
         displayCard.appendChild(musicInfoList);
+
+        currentMusic.album = currentMusic.album.replace('-', " ").toLowerCase();
+        currentMusic.track = currentMusic.track.replace('-', " ").toLowerCase();
+        currentMusic.artist = currentMusic.artist.replace('-', " ").toLowerCase();
+        console.log(currentMusic);
         
         var trackNameEl = document.createElement("li");
         trackNameEl.setAttribute("class", "uk-card-title card-title");
@@ -443,9 +454,9 @@ var napsterSearch = function (currentMusic) {
   });
 };
 
-var clearElements = function (element) {
-  element.innerHTML = "";
-};
+// var clearElements = function (element) {
+//   element.innerHTML = "";
+// };
 
 userSearchContainer.addEventListener("submit", searchHandler);
 
