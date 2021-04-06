@@ -8,4 +8,4 @@ Our team used data from: Open Weather, Last.fm, and Napster. Styling by UIkit.
 
 
 
-https://0blockaye0.github.io/Group-8-Project-1/
+https://0blockaye0.github.io/WeatherGroupie/
